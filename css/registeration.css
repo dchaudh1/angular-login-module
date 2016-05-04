@@ -1,0 +1,62 @@
+body
+{
+    
+    /*background-color: #1b1b1b;*/
+    padding-top: 40px;
+}
+
+
+.input-group-addon
+{
+    background-color: rgb(50, 118, 177);
+    border-color: rgb(40, 94, 142);
+    color: rgb(255, 255, 255);
+}
+.form-control:focus
+{
+    background-color: rgb(50, 118, 177);
+    border-color: rgb(40, 94, 142);
+    color: rgb(255, 255, 255);
+}
+.form-signup input[type="text"],.form-signup input[type="password"] { border: 1px solid rgb(50, 118, 177); }
+
+.progress {
+    margin-top: 6px;
+    margin-bottom: 8px !important;
+    width: 290px;
+    height: 11px;
+    margin-top: 6px;
+    margin-left: 14px;
+    border-radius: 3px !important;
+}
+
+.errormsg {
+    color: red;
+    /*font-family: 'Signika Regular', 'Signika', San-serif;*/
+    font-weight: 400;
+    font-size: 11px;
+    font-style: normal;
+
+}
+
+.checkbox-inline, .radio-inline {
+  color: #3276B1;
+}
+
+.text-center{
+    font-stretch: extra-expanded;
+    font-weight: 600;
+    font-size: 21px !important;
+    color: #333 !important;
+
+}
+
+.header{
+    
+    text-align: center !important;
+}
+
+.mainheader{
+  border-bottom: 1px solid #e5e5e5;  
+}
+

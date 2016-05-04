@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+
+<head>
+<meta charset="utf-8" />
+<meta name="description" content="Password Strength Calculator">
+<meta name="keywords" content="Password,Strength,Custom Filter ,Registeration,AngularJS, BOOTSTRAP, CSS,JQUERY">
+<title>Registeration Page</title>
+<link rel="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/registeration.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
+<script>
+$(document).ready(function(){
+    $('.pwdicon').tooltip({title: "Paswword must have atleast 8 Characters, 1 Uppercase, 1 Lowercase, 1 Symbol and 1 Number", 
+      trigger: "hover",placement:"right"}); 
+    $('.usericon').tooltip({title: "Username must have atleast 5 Characters and be Alphanumeric",
+      trigger: "hover",placement:"right"}); 
+    $('.nameicon').tooltip({title: "Must contain letters only",
+      trigger: "hover",placement:"right"}); 
+ });
+</script>
+</head>
+
+<body ng-controller="controllerPassword"  background="image/bckgroundimg.jpg">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="mainheader">
+                    <div class="header">
+                    
+                    <a href="https://egen.solutions/" target="_blank"><img class="logo" style="height: 40px; width: 40px; margin-bottom: 9px;" src="image/egen-logo.png" ></a>
+                    <span class="text-center">
+                        Sign Up!
+                    </span><br/>
+                    </div>
+                </div>
+                    <div>&nbsp;</div>
+                    <form name="myForm" class="form form-signup" role="form" >
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon nameicon"><span class="glyphicon glyphicon-user"></span></span>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Name" ng-model="name" ng-pattern="/^[a-zA-Z ]*$/" required />
+                        </div>
+                        <span class="errormsg" ng-show="myForm.name.$error.required && myForm.name.$dirty">Name is required</span>
+                        <span class="errormsg" ng-show=" myForm.name.$error.pattern && myForm.name.$dirty">Name should contain letters only.</span>
+                            
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon usericon"><span class="glyphicon glyphicon-user"></span></span>
+                            <input type="text" id="username" name="username" class="form-control" placeholder="Username" ng-model="username" ng-minlength="5" ng-maxlength="20" ng-pattern="/^[A-z][A-z0-9]*$/" required />
+                        </div>
+                            <span class="errormsg" ng-show="myForm.username.$error.required && myForm.username.$dirty">Username is Required</span>
+                               <span class="errormsg" ng-show="!myForm.username.$error.minLength && !myForm.username.$error.maxLength && myForm.username.$error.pattern && myForm.username.$dirty">Username must start with a letter, and contain letters &amp; numbers only.</span>
+                               <span class="errormsg" ng-show="!myForm.username.$error.required && (myForm.username.$error.minlength || myForm.username.$error.maxlength) && myForm.username.$dirty">Username Must be between 5 and 20 characters.
+                            </span>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
+                            </span>
+                            <input type="text" class="form-control" placeholder="Email Address" id="email" name="email" ng-model="email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required/>
+                        </div>
+                        <span class="errormsg" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                          <span class="errormsg" ng-show="myForm.email.$error.required && myForm.email.$dirty">Email is required.</span>
+                          <span class="errormsg" ng-show="!myForm.email.$error.required && myForm.email.$error.pattern && myForm.email.$dirty">Invalid Email Address.</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon pwdicon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input type="password" class="form-control" name="pw" id="pw" ng-model="modelPwd" watch-change="update" ng-minlength="8" ng-pattern="/(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[@#$%^_*!])/" placeholder="Password" required/>
+                        </div>
+                        <span style="display:none;">{{modelPwdCopy | filterPassword}}</span>
+                        <span style="display:none;">{{filterResult}}</span>
+                        <span class="errormsg" ng-show="myForm.pw.$error.required && myForm.pw.$dirty">Password is Required</span>
+                           <span class="errormsg" ng-show="!myForm.pw.$error.required && (myForm.pw.$error.minlength || myForm.pw.$error.maxlength) && myForm.pw.$dirty">Passwords must be of atleast 8 characters.</span>
+                           <span class="errormsg" ng-show="!myForm.pw.$error.required && !myForm.pw.$error.minlength && !myForm.pw.$error.maxlength && myForm.pw.$error.pattern && myForm.pw.$dirty">Password Must contain one lower &amp; uppercase letter, and one non-alpha character (a number & symbol.)
+                        </span>
+                        <div class="progress" >
+                          <div class="progress-bar" role="progressbar" aria-valuenow="{{getWidth()}}"
+                          aria-valuemin="0" aria-valuemax="100" ng-style="customStyle">
+                          </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input type="password" class="form-control" placeholder="Confirm Password" name="confirmpwd" id="confirmpwd" ng-model="confirmpwd" match="modelPwd" required/>
+                        </div>
+
+                        <span class="errormsg" ng-show="myForm.confirmpwd.$error.required && myForm.confirmpwd.$dirty">Please confirm your password.</span>
+                           <span class="errormsg" ng-show="!myForm.confirmpwd.$error.required && myForm.confirmpwd.$error.ready && myForm.pw.$dirty">Passwords do not match.</span>
+                    </div>
+
+                    <div class="form-group">
+                   <label class="radio-inline">
+                         <input type="radio" name="optradio">Male
+                       </label>
+                    <label class="radio-inline">
+                         <input type="radio" name="optradio" checked="true">Female
+                    </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                          <label for="agree" style="color:#3276B1;"><input type="checkbox" value="" id="agree" name="agree" ng-model="agree" >I've read the terms and conditions</label>
+                        </div>
+                    </div>
+                
+                <button type="submit" class="btn btn-sm btn-primary btn-block" ng-disabled="!myForm.$valid || !agree">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div> 
+
+</body>
+
+</html>

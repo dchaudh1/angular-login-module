@@ -1,0 +1,29 @@
+{
+  "name": "angular-password-strength-calculator",
+  "authors": [
+    "Deepika Chaudhari <chaudharidpka@gmail.com>"
+  ],
+  "description": "Checks the strength of the password",
+  "main": "",
+  "keywords": [
+    "angular",
+    "password",
+    "strength",
+    "filter"
+  ],
+  "repository": {
+   "type": "git",
+   "url": "https://github.com/dchaudh1/egen-fe-challenge.git"
+ },
+  "license": "MIT",
+  "homepage": "",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
+
